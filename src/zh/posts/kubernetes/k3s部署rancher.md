@@ -81,6 +81,12 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 # curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.30.4+k3s1 sh -s - --system-default-registry "registry.cn-hangzhou.aliyuncs.com" --write-kubeconfig ~/.kube/config --write-kubeconfig-mode 666 --disable traefik
 # 20240919使用v1.30.4+k3s1版本
 sudo curl –sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.30.4+k3s1 sh -s - --system-default-registry "registry.cn-hangzhou.aliyuncs.com" --write-kubeconfig ~/.kube/config --write-kubeconfig-mode 666 --disable traefik
+
+# 单节点 Server
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.31.5+k3s1 sh -s - --write-kubeconfig ~/.kube/config --write-kubeconfig-mode 666 --disable traefik
+# K3S_TOKEN在/var/lib/rancher/k3s/server/node-token
+#  Agent 节点加入 单节点 Server
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.127:6443 K3S_TOKEN=K10febe3fb2ddcc00e6c13099f0a846b4de3be74b77c5c1816583ecf265ed7b79f4::server:379b25a9cd4711122fb34c9c50a5bbcd sh -
 ~~~
 #### 卸载k3s
 ~~~shell
